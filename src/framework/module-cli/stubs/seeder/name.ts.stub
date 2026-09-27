@@ -1,0 +1,18 @@
+import { db } from "@/database/index.js";
+import { {{tableVariable}} } from "@/modules/{{module}}/database/models/{{name}}.js";
+
+export const table = {{tableVariable}};
+
+export default async function {{ClassName}}Seeder() {
+  const rows: (typeof {{tableVariable}}.$inferInsert)[] = [
+    // Add your seed data here
+    // Example:
+    // { name: "{{ClassName}} 1" },
+  ];
+
+  for (const row of rows) {
+    await db.insert({{tableVariable}}).values(row);
+  }
+
+  console.log("{{ClassName}} seeder completed");
+}

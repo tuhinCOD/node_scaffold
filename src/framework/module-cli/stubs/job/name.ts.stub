@@ -1,0 +1,21 @@
+import { Worker } from "bullmq";
+
+import { redis } from "@/framework/redis/redis.js";
+
+export const {{name}}Worker = new Worker(
+  "{{queue}}",
+  async (job) => {
+    console.log("Processing job:", job.name, job.data);
+  },
+  {
+    connection: redis,
+  },
+);
+
+{{name}}Worker.on("completed", (job) => {
+  console.log(`Job ${job.id} completed`);
+});
+
+{{name}}Worker.on("failed", (job, error) => {
+  console.error(`Job ${job?.id} failed:`, error);
+});

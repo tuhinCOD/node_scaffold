@@ -1,0 +1,170 @@
+/* base css for common design for support all component */
+
+/* for all device custom design scrollbar */
+*::-webkit-scrollbar {
+  width: 6px;
+  &-track {
+    background-color: $black;
+  }
+  &-thumb {
+    background-color: darken(#CDCDCD, 15%);
+  }
+}
+
+*{
+  scrollbar-width: thin;
+  scrollbar-color: $silver $black;
+}
+
+html, body{
+  height: 100%;
+}
+.wrapper, #app{
+  position: relative;
+  height: 100%;
+}
+.content-block{
+  height: 100%;
+}
+
+.custom-center-box{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+
+// bs custom breadcrumb item
+.breadcrumb .breadcrumb-item + .breadcrumb-item:before{
+  content: "|";
+  margin-left: -3px;
+  padding-right: 4px;
+  color: #cdcdcd;
+}
+
+// table top and bottom border color
+.table-vertical td{
+  border-color: $border-default-color !important;
+}
+.table-vertical td nav{
+  visibility: hidden;
+  @at-root .table-vertical td:hover nav{
+    visibility: visible;
+  }
+}
+
+// for touchscreen
+@media (hover: none) and (pointer: coarse){
+  .table-vertical td nav{
+    visibility: visible;
+  }
+}
+
+// vertical table-verical for small device
+@include bp-max(md){
+  .on{
+    display: block !important;
+  }
+  .table-vertical > thead > tr > td, .table-vertical > thead > tr > th, .table-vertical > tfoot > tr > td, .table-vertical > tfoot > tr > th{
+    display: none;
+  }
+  .table-vertical > thead > tr > td[data-head], .table-vertical > thead > tr > th[data-head]{
+    content: attr(data-head);
+    display: inline-block;
+    border: none;
+  }
+  .table-vertical > thead > tr > td[data-head]:not(:first-child), .table-vertical > thead > tr > th[data-head]:not(:first-child){
+    margin-left: -5px;
+    width: calc(100% - 36px);
+  }
+
+  .table-vertical > thead > tr, .table-vertical > tbody > tr{
+    display: block;
+    position: relative;
+  }
+  .table-vertical > tbody > tr> td, .table-vertical > tbody > tr> th{
+    display: none;
+  }
+  .table-vertical > tbody > tr> td[data-title], .table-vertical > tbody > tr> th[data-title]{
+    content: attr(data-title);
+    display: inline-block;
+    border: none !important;
+    nav{
+      visibility: visible;
+    }
+    button{
+      position: absolute;
+      right: 7.5px;
+      top: 15px;
+      width: 22px;
+      height: 23px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+  .table-vertical > tbody > tr> td[data-body], .table-vertical > tbody > tr> th[data-body]{
+    content: attr(data-body);
+    display: none;
+    position: relative;
+    padding-left: 100px;
+    border: none;
+  }
+  .table-vertical > tbody > tr> td[data-body]::before, .table-vertical > tbody > tr> th[data-body]::before{
+    content: attr(data-body);
+    position: absolute;
+    left: 10px;
+    display: block;
+  }
+  .table-vertical > thead > tr, .table-vertical > thead > tr, .table-vertical > tbody > tr, .table-vertical > tbody > tr, .table-vertical > tfoot > tr, .table-vertical > tfoot > tr{
+    border-bottom: 1px solid $border-default-color;
+  }
+  .table-vertical > tbody > tr> td[data-title]:not(:first-child), .table-vertical > tbody > tr> th[data-title]:not(:first-child){
+    margin-left: -5px;
+    width: calc(100% - 72px);
+  }
+}
+
+
+// pagination input field
+#navigation-inp input{
+  width: 35px;
+  padding-left: 0;
+  padding-right: 0;
+  &:focus{
+    border-color: #86b7fe !important;
+    position: relative;
+    z-index: 1;
+  }
+}
+
+// view switch for media library page
+.view-switch{
+  a{
+    border: 1px solid transparent;
+  }
+  .active{
+    border: 1px solid $blue;
+    color: $blue !important;
+    border-radius: 3px;
+  }
+}
+
+.accordion .sidetoggle{
+  position: relative;
+}
+.accordion a.collapsed .sidetoggle .plus::before{
+  content: "+";
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.accordion a .sidetoggle .plus::before{
+  content: "-";
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+}

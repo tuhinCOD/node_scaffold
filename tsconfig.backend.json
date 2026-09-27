@@ -1,0 +1,15 @@
+{
+	"extends": "@tsconfig/node24/tsconfig.json",
+	"include": ["src/**/*.ts"],
+	"exclude": ["src/resources/**"],
+	"compilerOptions": {
+		"module": "preserve",
+		"moduleResolution": "bundler",
+		"types": ["node"],
+		"noEmit": true,
+		"paths": {
+			"@/*": ["./src/*"]
+		},
+		"tsBuildInfoFile": "./node_modules/.tmp/tsconfig.backend.tsbuildinfo"
+	}
+}

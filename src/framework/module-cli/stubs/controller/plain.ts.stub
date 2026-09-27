@@ -1,0 +1,41 @@
+import type { NextFunction, Request, Response } from "express";
+
+/**
+ * GET /{{controller}}
+ * Returns a list of {{controller}} resources.
+ */
+export const index = async (_req: Request, res: Response, _next: NextFunction) => {
+  res.json({ message: "{{controller}} list fetched successfully", data: [] });
+};
+
+/**
+ * GET /{{controller}}/:id
+ * Returns a single {{controller}} resource by id.
+ */
+export const show = async (req: Request, res: Response, _next: NextFunction) => {
+  res.json({ message: "{{controller}} fetched successfully", data: { id: req.params.id, name: "" } });
+};
+
+/**
+ * POST /{{controller}}
+ * Creates a new {{controller}} resource from the request body.
+ */
+export const store = async (req: Request, res: Response, _next: NextFunction) => {
+  res.status(201).json({ message: "{{controller}} created successfully", data: req.body });
+};
+
+/**
+ * PUT /{{controller}}/:id
+ * Updates an existing {{controller}} resource by id and body.
+ */
+export const update = async (req: Request, res: Response, _next: NextFunction) => {
+  res.json({ message: "{{controller}} updated successfully", data: { id: req.params.id, ...req.body } });
+};
+
+/**
+ * DELETE /{{controller}}/:id
+ * Deletes a {{controller}} resource by id.
+ */
+export const destroy = async (req: Request, res: Response, _next: NextFunction) => {
+  res.json({ message: "{{controller}} deleted successfully", data: { id: req.params.id } });
+};

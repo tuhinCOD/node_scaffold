@@ -1,0 +1,211 @@
+/* layout design */
+
+[data-name='layout']{
+  $sidebar: 220px;
+  overflow-x: hidden;
+  .topbar{
+    position: fixed;
+    top: 0;
+    width: inherit;
+    z-index: 100001;
+    .logo-sm{
+      display: none;
+    }
+    .logo-lg{
+      display: block;
+    }
+  }
+  .sidebar, .mainbody{
+    position: relative;
+    flex-shrink: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    top: 40px;
+    height: calc(100% - 40px);
+  }
+  .sidebar{
+    width: $sidebar;
+    left: 0;
+    transition: all .3s;
+    & > :last-child{
+      margin-bottom: 20px;
+    }
+    .accordion{
+      ul li.active{
+        background: lighten($black, 5%);
+      }
+      ul li a{
+        display: block;
+        .sidemenu-icon{
+          width: 40px;
+          height: 40px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+      }
+      ul li > ul{
+        padding-left: 18px;
+        border-top: 1px solid $blue;
+        border-bottom: 1px solid $blue;
+        background: lighten($black, 5%);
+        li.subactive{
+          background: darken($black, 5%);
+        }
+        li a{
+          border-left: 1px solid #ffffff;
+          position: relative;
+          &:before{
+            content: "";
+            display: inline-block;
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #ffffff;
+            border-radius: 10rem;
+            left: -2.6%;
+            top: 50%;
+            transform: translateY(-50%);
+          }
+          &:hover{
+            background: darken($black, 5%);
+          }
+        }
+      }
+    }
+  }
+  .mainbody{
+    width: calc(100% - #{$sidebar});
+    left: 0;
+    transition: all .3s;
+    &::-webkit-scrollbar {
+      width: 6px;
+      &-track {
+        background-color: white;
+      }
+      &-thumb {
+        background-color: darken(#CDCDCD, 15%);
+      }
+    }
+    scrollbar-width: thin;
+    scrollbar-color: $silver white;
+
+    header{
+      .navbar ul > {
+        li{
+          & + li{
+            margin-left: -5px !important;
+          }
+          &.active a{
+            color: #222222 !important;
+          }
+          a{
+            position: relative;
+            color: #666666;
+            span{
+              position: absolute;
+              top: 2px;
+              right: 2px;
+              font-size: .5rem;
+            }
+            &:hover{
+              color: #222222;
+            }
+          }
+          .dropdown-toggle{
+            margin-left: 0;
+          }
+        }
+      }
+    }
+    .content{
+      height: calc(100% - 35px);
+      overflow-y: auto;
+      overflow-x: hidden;
+      & > :last-child{
+        margin-bottom: 20px;
+      }
+    }
+  }
+
+  // javascript toggling
+  .caret.spin{
+    transform: rotate(90deg) !important;
+  }
+  .sidebar.off, .mainbody.off, .sidebar.on, .mainbody.on{
+    left: -$sidebar;
+  }
+  .mainbody.off{
+    width: 100%;
+  }
+
+  // media query max 767px
+  @include bp-max(md){
+    .sidebar, .mainbody{
+      left: -$sidebar;
+    }
+    .mainbody{
+      width: 100%;
+      &.off::after, &.on::after{
+        content: "";
+        position: fixed;
+        top: inherit;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,.2);
+      }
+    }
+
+    // javascript toggling
+    .sidebar.off, .mainbody.off{
+      left: 0;
+    }
+    .sidebar.on, .mainbody.on{
+      left: -$sidebar*2;
+    }
+  }
+
+  // media query 768 to 970px
+  @include bp-only(md,lg){
+    .mainbody{
+      &.off::after, &.on::after{
+        content: "";
+        position: fixed;
+        top: inherit;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,.2);
+      }
+    }
+    .sidebar{
+      // opacity: .1;
+      width: 40px;
+      position: absolute;
+      z-index: 100002;
+      
+      a > .sidetoggle{
+        width: 0;
+      }
+    }
+    .mainbody, .mainbody.off, .mainbody.on{
+      left: 40px;
+      width: calc(100% - 40px);
+    }
+
+    // javascript toggling
+    .sidebar.off, .sidebar.on{
+      left: 0;
+    }
+    .sidebar.off{
+      width: $sidebar;
+    }
+    .sidetoggle.on{
+      width: $sidebar;
+    }
+  }
+
+}
+
+.big-i{
+  font-size: 65px;
+}

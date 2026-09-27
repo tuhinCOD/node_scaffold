@@ -1,0 +1,11 @@
+import { Queue } from "bullmq";
+
+import { redis } from "@/framework/redis/redis.js";
+
+export const {{name}}Queue = new Queue("{{queue}}", {
+  connection: redis,
+});
+
+export async function {{name}}Job(data: Record<string, unknown> = {}) {
+  return {{name}}Queue.add("{{name}}", data);
+}
